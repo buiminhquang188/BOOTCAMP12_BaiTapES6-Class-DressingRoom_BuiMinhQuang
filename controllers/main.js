@@ -31,34 +31,57 @@ const renderNavPills = (navPills) => {
         const { showName, type } = list;
         content += `
         <li class="nav-item">
-            <a class="nav-link" id="pills-${type}-tab" data-toggle="pill" href="#pills-${type}" role="tab" aria-controls="pills-${type}" aria-selected="true">${showName}</a>
+            <a class="nav-link" id="pills-${type}-tab" data-toggle="pill" href="#pills-${type}" role="tab" aria-controls="pills-${type}" aria-selected="true"}>${showName}</a>
         </li>
         `
     })
     document.querySelector('.nav-pills').innerHTML = content;
-    document.querySelector('.nav-link').addEventListener('click', renderHTML);
 }
 
+
 const renderHTML = () => {
-    let content = ' ';
-    listChosen.map((items, index) => {
+    let content = '';
+    const checkType = listChosen.map((items, index) => {
         const { type, name, imgShow } = items;
         content += `
-        <div class="tab-pane fade container " id="pills-${type}" role="tabpanel" aria-labelledby="pills-${type}-tab">
-                 <div class="col-3 ">
-                     <div class="card text-center">
-                         <img class="card-img-top img-fluid" src="${imgShow}" alt="">
-                         <div class="card-body">
-                             <h4 class="card-title">${name}</h4>
-                             <button class="btn btn-light w-100">Thử đồ</button>
-                         </div>
-                     </div>
-                 </div>
-        </div>
-        `
+        <div class="tab-pane" id="pills-${type}" role="tabpanel" aria-labelledby="pills-${type}-tab">
+            <div id="product" class="row">
+            <div class="card text-center img-fluid col-3">
+            <img class="card-img-top img-fluid" src="${imgShow}" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">${name}</h4>
+                    <button class="btn btn-light w-100">Thử đồ</button>
+                </div>
+            </div>
+            </div>
+        </div >
+    `
+        return type;
     })
     document.querySelector('.tab-content').innerHTML = content;
+    // renderProduct(checkType);
 }
+
+// const renderProduct = (checkType) => {
+//     let content = '';
+//     listChosen.map((items, idx) => {
+//         const { type, name, imgShow } = items;
+//         console.log(checkType[idx]);
+//         if (checkType[idx] != type) {
+//             return;
+//         }
+//         content += `
+//         <div class="card text-center img-fluid col-3">
+//         <img class="card-img-top img-fluid" src="${imgShow}" alt="">
+//             <div class="card-body">
+//                 <h4 class="card-title">${name}</h4>
+//                 <button class="btn btn-light w-100">Thử đồ</button>
+//             </div>
+//         </div>
+//     `
+//     })
+//     getEle('product').innerHTML = content;
+// }
 
 const renderClothes = (tabPanes) => {
     tabPanes.map((dress, index) => {
@@ -105,5 +128,6 @@ const renderClothes = (tabPanes) => {
             // }
         }
     })
+    renderHTML();
 }
 

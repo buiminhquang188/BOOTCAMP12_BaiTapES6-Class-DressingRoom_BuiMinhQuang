@@ -6,19 +6,6 @@ export default class TopClothes extends ChoseItem {
     }
 
     renderTopClothes() {
-        // const content = this.id.map(topClothes => {
-        //     return `
-        //         <div class="col-3">
-        //             <div class="card">
-        //                 <img class="card-img-top" src="${this.imgShow}" alt="">
-        //                 <div class="card-body">
-        //                     <h4 class="card-title">${this.name}</h4>
-        //                     <button class="btn btn-light">Thử đồ</button>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     `;
-        // })
-        // return content.join();
+
     }
 }
