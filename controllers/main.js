@@ -11,7 +11,6 @@ import Background from "../models/Background.js";
 const callData = new CallData();
 let listChosen = [];
 
-const getEle = id => document.getElementById(id);
 const getClass = className => document.getElementsByClassName(className);
 const getData = () => {
     callData.fetchData()
@@ -119,10 +118,10 @@ function renderClothes(tabPanes) {
                 listChosen = [...listChosen, background];
                 break;
             }
-            // default: {
-            //     alert('Không có loại cần tìm');
-            //     break;
-            // }
+            default: {
+                alert('Không có loại cần tìm');
+                break;
+            }
         }
     })
 }
@@ -152,7 +151,7 @@ const tryOutFit = (idClothes, checkType, imgSrc) => {
         }
         case 'botclothes': {
             bikinibottom[0].style.backgroundImage = stringImgSrc;
-            bikinibottom[0].style.zIndex = '2';
+            bikinibottom[0].style.zIndex = '1';
             bikinibottom[0].style.width = '100%';
             bikinibottom[0].style.transform = 'scale(0.5,0.5)';
             bikinibottom[0].style.top = '-9.4%';
