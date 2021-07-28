@@ -12,7 +12,7 @@ const callData = new CallData();
 let listChosen = [];
 
 const getEle = id => document.getElementById(id);
-const el = name => document.querySelectorAll(String(name))
+const getClass = className => document.getElementsByClassName(className);
 const getData = () => {
     callData.fetchData()
         .then(res => {
@@ -28,7 +28,7 @@ const renderNavPills = (navPills, tabPanes) => {
     renderClothes(tabPanes);
     let renderNavPills = '';
     let renderTabPane = '';
-    var checkType = navPills.map((list, index) => {
+    let checkType = navPills.map((list, index) => {
         const { showName, type } = list;
         renderNavPills += `
         <li class="nav-item">
@@ -55,36 +55,29 @@ const renderProduct = (checkType) => {
         content = '';
         let stringID = 'product-' + checkType[i];
         let pillID = 'pills-' + checkType[i];
-        listChosen.map((items, idx) => {
-            const { type, name, imgShow } = items;
+        let id = listChosen.map((items, idx) => {
+            const { type, name, imgShow, id, imgSrc } = items;
             if (checkType[i] === type) {
                 content +=
                     `
-            <div class="card text-center">
-                <img class="card-img-top img-fluid" src="${imgShow}" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">${name}</h4>
-                    <button class="btn btn-light w-100">Thử đồ</button>
-                </div>
-            </div>
-            `
+                    <div class="card text-center">
+                        <img class="card-img-top img-fluid" src="${imgShow}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">${name}</h4>
+                            <button class="btn btn-light w-100" onclick="tryOutFit('${id}', '${type}', '${imgSrc}')">Thử đồ</button>
+                        </div>
+                    </div>
+                    `
                 document.querySelector(String('.' + pillID + ' .' + stringID)).innerHTML = content;
-                return;
+                return id;
             }
             else if (checkType[i] != type) {
                 return;
             }
-            else if (i == 1) {
-                return;
-            }
         })
-        // console.log(document.querySelectorAll('.tab-pane .row')[i])
-        // document.getElementById(stringID).innerHTML = content;
-        console.log(document.querySelector(String('.' + pillID + ' .' + stringID)));
-        // console.log(document.querySelectorAll(String('#' + stringID))[0]);
-        // document.querySelectorAll(String('#' + stringID))[0].innerHTML = content;
     }
 }
+
 
 
 function renderClothes(tabPanes) {
@@ -135,3 +128,58 @@ function renderClothes(tabPanes) {
 }
 
 getData();
+
+const tryOutFit = (idClothes, checkType, imgSrc) => {
+    const stringImgSrc = String('url' + '(' + "'" + imgSrc + "'" + ')')
+    let body = getClass('body');
+    let model = getClass('model');
+    let hairstyle = getClass('hairstyle');
+    let necklace = getClass('necklace');
+    let bikinitop = getClass('bikinitop');
+    let bikinibottom = getClass('bikinibottom');
+    let handbag = getClass('handbag');
+    let feet = getClass('feet');
+    let background = getClass('background');
+    switch (checkType) {
+        case "topclothes": {
+            bikinitop[0].style.backgroundImage = stringImgSrc;
+            bikinitop[0].style.zIndex = '2';
+            bikinitop[0].style.width = '100%';
+            bikinitop[0].style.transform = 'scale(0.5,0.5)';
+            bikinitop[0].style.top = '-9.4%';
+            bikinitop[0].style.left = '-2.9%';
+            break;
+        }
+        case 'botclothes': {
+            bikinibottom[0].style.backgroundImage = stringImgSrc;
+            bikinibottom[0].style.zIndex = '2';
+            bikinibottom[0].style.width = '100%';
+            bikinibottom[0].style.transform = 'scale(0.5,0.5)';
+            bikinibottom[0].style.top = '-9.4%';
+            bikinibottom[0].style.left = '-2.9%';
+            break;
+        }
+        case 'shoes': {
+            feet[0].style.backgroundImage = stringImgSrc;
+            break;
+        }
+        case 'handbags': {
+            handbag[0].style.backgroundImage = stringImgSrc;
+            break;
+        }
+        case 'necklaces': {
+            necklace[0].style.backgroundImage = stringImgSrc;
+            break;
+        }
+        case 'hairstyle': {
+            hairstyle[0].style.backgroundImage = stringImgSrc;
+            break;
+        }
+        case 'background': {
+            background[0].style.backgroundImage = stringImgSrc;
+            break;
+        }
+    }
+}
+
+window.tryOutFit = tryOutFit;
